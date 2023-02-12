@@ -30,27 +30,28 @@ function Teacher() {
 		}
    },[specificExam])
 
+
 	useEffect(()=>{
 		if (state_of_NameOfClassContext) {
 			console.log("state_of_NameOfClassContext = ",state_of_NameOfClassContext);
 		}
    },[state_of_NameOfClassContext])
 
+
 	async function funcCheckToken() {
 		let dataFromCheckToken = await checkToken("teacher")
 		if(!dataFromCheckToken){
 			navigate("/login")
 		}
-		console.log(dataFromCheckToken);
+		console.log("dataFromCheckToken = ",dataFromCheckToken);
 		// console.log("dataFromCheckToken = ",dataFromCheckToken.class_permission[0]);
+		// setState_of_NameOfClassContext(dataFromCheckToken.class_permission[0]? dataFromCheckToken.class_permission[0] : "-")
 		setState_of_NameOfClassContext(dataFromCheckToken.class_permission[0]? dataFromCheckToken.class_permission[0] : "-")
 		console.log(dataFromCheckToken.class_permission[0]);
 		ValueUseContext.set(dataFromCheckToken)
 	}
 
 
-
-	
 	useEffect(()=>{
 		// console.log("ss");
 		// console.log(ValueUseContext.dataOfUser);
@@ -78,15 +79,15 @@ function Teacher() {
 	},[])
 
 
-    useEffect(()=>{
-        if(state_of_NameOfClassContext){
-            console.log("state_of_NameOfClassContext = ",state_of_NameOfClassContext);
+   useEffect(()=>{
+      if(state_of_NameOfClassContext){
+         console.log("state_of_NameOfClassContext = ",state_of_NameOfClassContext);
+      }
+   },[state_of_NameOfClassContext])
 
-        }
-    },[state_of_NameOfClassContext])
 
 
-// ****TODO לעשות אותה פונקציה גלובלית
+	// ****TODO לעשות אותה פונקציה גלובלית
 	function logOut() {
 		navigate("/login");
 		localStorage.removeItem("className")
@@ -141,7 +142,7 @@ function Teacher() {
 							}></Route>
 							<Route path='tableListStudent' element={<TableListStudent />}></Route>
 							<Route path='showAllExams' element={<ShowAllExams setSpecificExam={setSpecificExam}/>}></Route>
-                    		<Route path='createExam' element={<CreateExam  specificExam={specificExam}/>} ></Route>
+                    	<Route path='createExam' element={<CreateExam  specificExam={specificExam}/>} ></Route>
 							<Route path='*' element={location.pathname != "/teacher" && <h1>Teacher *********</h1>} />
 						</Routes>
 					{/* </Paper> */}

@@ -86,6 +86,7 @@ function ShowUser(props) {
 			<h1>List user</h1>
 			<br></br>
 			{dateFromServer && <TebleOf_ShowUser dateFromServer={dateFromServer} setUserToEdit={setUserToEdit}/>}
+			
 			{userToEdit && 
 				<div className="wrapEditUser">
 					<Box

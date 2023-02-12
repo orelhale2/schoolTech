@@ -9,8 +9,6 @@ import TebleOfListExams from "../../tables/TebleOf_ListExams"
 import { useNavigate } from "react-router-dom"
 
 
-import EditIcon from '@mui/icons-material/Edit';
-import { Avatar, Box, Toolbar } from "@mui/material"
 import Style_ButtonAdd from "../../style/Style_ButtonAdd"
 
 
@@ -30,7 +28,6 @@ let ShowAllExams = (props)=>{
 
 	useEffect(()=>{
 		 if(nameOfThisClass){
-			  console.log(nameOfThisClass);
 			  props.setSpecificExam(null)
 		 }
 	},[])
@@ -49,17 +46,15 @@ let ShowAllExams = (props)=>{
 			axios.post("http://localhost:4000/users/getAllExamsFromOneTeacher", dataToServer)
 			.then(
 				(data)=>{
-					 let dataFromServer = data.data
+					let dataFromServer = data.data
 
-					 if(!dataFromServer[0]){
-							setNotData("You don't have any tests yet")
-					 }else{
-						  setAllExams(dataFromServer)
-					 }
+					if(!dataFromServer[0]){
+						setNotData("You don't have any tests yet")
+					}else{
+						setAllExams(dataFromServer)
+					}
 				},
-				(err)=>{
-					alert("err")
-				}
+				(err)=>{alert("err")}
 			)
 		 }
 	},[])
@@ -77,15 +72,12 @@ let ShowAllExams = (props)=>{
 					<TebleOfListExams AllExams={AllExams} setSpecificExam={props.setSpecificExam} setNotData={setNotData} specificExam={specificExam}/>
 				</>
 			} 
-		
 
 			{/* {specificExam && checkShow &&
 				<CreateExam specificExam={specificExam} setCheckShow={setCheckShow} />
 			} */}
 		</div>
 	)
-
-
 }
 
 

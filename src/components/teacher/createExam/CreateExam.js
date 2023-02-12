@@ -106,8 +106,6 @@ let CreateExam = (props)=>{
             examList: dataForDatabase,
             average: String(Math.round(averageCount / listStudents.length)),
         }
-
-
         
         console.log("obj = ",obj);
         
@@ -131,26 +129,27 @@ let CreateExam = (props)=>{
                 <div style={{width: "90%"}}><Style_BackButton text={"Back to Exam list"} onClick={()=>{navigate("../showAllExams")}}/></div>
 
                 <Box
-                      sx={{
-                          display: 'flex',
-                          flexWrap: 'wrap',
-                          "justifyContent": 'center',
-                          '& > :not(style)': {
-                              m: 1,
-                              width: 550,
-                              minHeight: 500,
-                              padding: 3
-                          },
-                      }}
-                      >
-                          <Paper elevation={3} sx={{"padding": '1rem 0rem'}}>
+                sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                "justifyContent": 'center',
+                '& > :not(style)': {
+                    m: 1,
+                    width: 550,
+                    minHeight: 500,
+                    padding: 3
+                },
+                }}
+                >
+                <Paper elevation={3} sx={{"padding": '1rem 0rem'}}>
                            
                 <form className="myFlexColumnAlineCenter" onSubmit={(e)=>{e.preventDefault(); completed()}}>
-                    {valueOfDate && <input required value={valueOfDate}  type={"date"} onChange={(e)=>{
-                        console.log("input = ",e.target.value);
-                        setValueOfDate(e.target.value)
-                    }}></input>}
-
+                    {valueOfDate && 
+                        <input required value={valueOfDate}  type={"date"} onChange={(e)=>{
+                            console.log("input = ",e.target.value);
+                            setValueOfDate(e.target.value)
+                        }}></input>
+                    }
                     <br></br>
 
                     <div className='myStyleOfAlineItems2'>
@@ -158,18 +157,19 @@ let CreateExam = (props)=>{
                     </div>
                     <br></br>
 
-                    {editspecificExam && <IconButton onClick={()=>{
-                        console.log(editspecificExam._id);
-                        axios.delete("http://localhost:4000/users/deleteExam",{params: {id: editspecificExam._id}})
+                    {editspecificExam && 
+                        <IconButton onClick={()=>{
+                            console.log("editspecificExam._id = ",editspecificExam._id);
+                            axios.delete("http://localhost:4000/users/deleteExam",{params: {id: editspecificExam._id}})
                             .then(
                                 (data)=>{
                                     console.log(data.data)
                                     navigate("../showAllExams")
                                 },
                                 (err)=>{console.log("err in deleteExam = ",err)}
-                                )
-                        
-                        }}><DeleteIcon color="error" /></IconButton>}
+                            )
+                        }}><DeleteIcon color="error" /></IconButton>
+                    }
             
                     
                     <TebleOf_CreateExam TableContent={{listStudents: listStudents, scoreList: scoreList}} setScoreList={setScoreList}/>

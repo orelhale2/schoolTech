@@ -35,23 +35,22 @@ function TableListStudent(props) {
         if(dataTable){
 
             let copyToFuncOnClick = []
-            
-        dataTable.listStudent.map((item,i)=>{
-            copyToFuncOnClick[i] = []
-          saveData[i].map((item2, i2)=>{
-            copyToFuncOnClick[i][i2]= ()=>{
-              if(saveData[i][i2] != saveTheDataSelection){
-                let copySaveData = [...saveData]
-                copySaveData[i][i2] = saveTheDataSelection
-                setSaveData(copySaveData)
-              }
-            } 
-          })
-        })
-        console.log("copyToFuncOnClick = ",copyToFuncOnClick    );
-        setFuncOnClick(copyToFuncOnClick)
-    }
-      },[saveTheDataSelection,dataTable])
+            dataTable.listStudent.map((item,i)=>{
+                copyToFuncOnClick[i] = []
+                saveData[i].map((item2, i2)=>{
+                    copyToFuncOnClick[i][i2]= ()=>{
+                        if(saveData[i][i2] != saveTheDataSelection){
+                            let copySaveData = [...saveData]
+                            copySaveData[i][i2] = saveTheDataSelection
+                            setSaveData(copySaveData)
+                        }
+                    } 
+                })
+            })
+            console.log("copyToFuncOnClick = ",copyToFuncOnClick    );
+            setFuncOnClick(copyToFuncOnClick)
+        }
+    },[saveTheDataSelection, dataTable])
 
 
     const handleChange = (newValue) => {
@@ -100,7 +99,7 @@ function TableListStudent(props) {
     const getListStudentOfClass = (nameOfClass)=>{
         
         setNameOfThisClass(nameOfClass)
-        axios.post("http://localhost:4000/users/GetListOfStudentsInSpecificClasses",  {nameOfClass: nameOfClass})
+        axios.post("http://localhost:4000/users/GetListOfStudentsInSpecificClasses",{nameOfClass: nameOfClass})
         .then( async(data)=>{
             let obj = {}
             obj.listStudent = data.data
